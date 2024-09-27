@@ -1,24 +1,23 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
+import WaterTracker from "./waterTracker";
 
 //create your first component
 const Home = () => {
+	const [count, setCount] = useState(0)
+
+	const increaseWater = (e) => {
+		e.preventDefault();
+		if(count < 8) {
+			setCount(count + 1);
+		}
+		else {
+			setCount(0);
+		}
+	}
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="text-center m-5">
+			<WaterTracker glasses={count}/>
+			<button className="btn btn-primary" onClick={(e)=>increaseWater(e)}>I drank more water</button>
 		</div>
 	);
 };
